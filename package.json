@@ -2,12 +2,10 @@
   "name": "FordBmaxManualDownloader",
   "version": "1.0.0",
   "scripts": {
-    "start": "node index.js",
-    "merge": "node mergeFiles.js"
+    "start": "node index.js"
   },
   "type": "module",
   "dependencies": {
-    "pdf-merger-js": "^5.1.1",
     "puppeteer": "^21.11.0"
   }
 }
