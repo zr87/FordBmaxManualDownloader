@@ -2,7 +2,8 @@
   "name": "FordBmaxManualDownloader",
   "version": "1.0.0",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "merge": "node mergeFiles.js"
   },
   "type": "module",
   "dependencies": {
