@@ -19,7 +19,7 @@ const LAST_PAGE_URL = `https://www.fordservicecontent.com/Ford_Content/vdirsnet/
     const page = await browser.newPage();
 
     // Navigate the page to a URL
-    await page.goto(LAST_PAGE_URL, {waitUntil: 'networkidle0'});
+    await page.goto(START_PAGE_URL, {waitUntil: 'networkidle0'});
 
     //To reflect CSS used for screens instead of print
     await page.emulateMediaType('screen');
