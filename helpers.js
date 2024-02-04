@@ -23,7 +23,7 @@ export async function goToNextPage(page) {
 export async function downloadPage(page, counter) {
     try {
         const pdf = await page.pdf({
-            path: `result/page-${counter}.pdf`,
+            path: `pages/page-${counter}.pdf`,
             margin: { top: '0', right: '50px', bottom: '0', left: '50px' },
             printBackground: true,
             format: 'A4',
@@ -32,3 +32,6 @@ export async function downloadPage(page, counter) {
         console.error(error)
     }
 }
+
+
+export class LastPageException {}
