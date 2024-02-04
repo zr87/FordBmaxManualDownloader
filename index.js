@@ -2,7 +2,7 @@ import puppeteer, {TimeoutError} from 'puppeteer';
 import {
     downloadPage,
     getNextButton,
-    goToNextPage,
+    goToNextPage, hideFooter,
     LastPageException,
     removeButtons
 } from "./helpers.js";
@@ -24,11 +24,12 @@ const LAST_PAGE_URL = `https://www.fordservicecontent.com/Ford_Content/vdirsnet/
     //To reflect CSS used for screens instead of print
     await page.emulateMediaType('screen');
 
-
     let pageCounter = 1;
     try {
         do {
             await removeButtons(page);
+
+            await hideFooter(page);
 
             await downloadPage(page, pageCounter)
             console.log("page counter: ", pageCounter);
@@ -43,6 +44,8 @@ const LAST_PAGE_URL = `https://www.fordservicecontent.com/Ford_Content/vdirsnet/
     } catch (error) {
         if (error instanceof TimeoutError || error instanceof LastPageException) {
             console.info("Already on last page");
+        } else {
+            console.error(error)
         }
     } finally {
         console.info("Download finished")

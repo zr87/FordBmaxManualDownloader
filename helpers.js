@@ -20,6 +20,23 @@ export async function goToNextPage(page) {
     return await nextBtn.click()
 }
 
+export async function hideFooter(page) {
+    const dataAttributeValue = 'footer'
+
+    const elementHandle = await page.$(`[data-role="${dataAttributeValue}"]`);
+    if (elementHandle) {
+        // Change opacity to zero
+        await page.evaluate((element) => {
+            element.style.opacity = '0';
+        }, elementHandle);
+
+        // Optionally, you can wait for a short period to see the effect
+        await page.waitForTimeout(0);
+    } else {
+        console.error('Element not found');
+    }
+}
+
 export async function downloadPage(page, counter) {
     try {
         const pdf = await page.pdf({
