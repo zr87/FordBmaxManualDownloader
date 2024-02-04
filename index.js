@@ -1,8 +1,8 @@
-import puppeteer from 'puppeteer';
-import {removeButtons} from "./helpers.js";
+import puppeteer, {TimeoutError} from 'puppeteer';
+import {downloadPage, getNextButton, goToNextPage, removeButtons} from "./helpers.js";
 
-const START_PAGE_URL = `https://www.fordservicecontent.com/Ford_Content/vdirsnet/OwnerManual/Home/Content?variantid=3548&languageCode=hu&countryCode=HUN&Uid=G1470770&ProcUid=G1467680&userMarket=HUN&div=f&vCode=WF0KXXERJKFM14824&vFilteringEnabled=False&buildtype=web`;
-const NEXT_PAGE_BTN_CLASS = 'ui-btn-right menuButton ui-link ui-btn ui-shadow ui-corner-all';
+const START_PAGE_URL2 = `https://www.fordservicecontent.com/Ford_Content/vdirsnet/OwnerManual/Home/Content?variantid=3548&languageCode=hu&countryCode=HUN&Uid=G1470770&ProcUid=G1467680&userMarket=HUN&div=f&vCode=WF0KXXERJKFM14824&vFilteringEnabled=False&buildtype=web`;
+const START_PAGE_URL = `https://www.fordservicecontent.com/Ford_Content/vdirsnet/OwnerManual/Home/Content?variantid=3548&languageCode=hu&countryCode=HUN&Uid=G1946637&ProcUid=G1941190&userMarket=HUN&div=f&vCode=WF0KXXERJKFM14824&vFilteringEnabled=False&buildtype=web`;
 
 
 (async () => {
@@ -13,26 +13,31 @@ const NEXT_PAGE_BTN_CLASS = 'ui-btn-right menuButton ui-link ui-btn ui-shadow ui
     const page = await browser.newPage();
 
     // Navigate the page to a URL
-    await page.goto(START_PAGE_URL, { waitUntil: 'networkidle0' });
+    await page.goto(START_PAGE_URL, {waitUntil: 'networkidle0'});
 
     //To reflect CSS used for screens instead of print
     await page.emulateMediaType('screen');
 
-    await removeButtons(page)
+
+    let pageCounter = 201;
 
     try {
-        const pdf = await page.pdf({
-            path: 'result.pdf',
-            margin: { top: '0', right: '50px', bottom: '0', left: '50px' },
-            printBackground: true,
-            format: 'A4',
-        });
+        do {
+            await removeButtons(page);
+
+            await downloadPage(page, pageCounter)
+            console.log("pageCounter", pageCounter);
+            await goToNextPage(page)
+            pageCounter++;
+        } while (await getNextButton(page))
     } catch (error) {
-        console.error(error)
+        if (error instanceof  TimeoutError) {
+            console.info("Already on last page");
+        }
+    } finally {
+        console.info("Download finished")
     }
 
-    // Print the full title
-    console.log('The title of this blog post is "%s".', fullTitle);
 
     await browser.close();
 })();
