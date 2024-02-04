@@ -140,3 +140,7 @@ dist
 
 # ignore folder where PDFs are generated
 /result/
+
+
+#Mac os .DS_Store
+.DS_Store
