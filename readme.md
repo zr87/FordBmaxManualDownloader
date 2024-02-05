@@ -2,6 +2,9 @@
 
 This Node.js program utilizes Puppeteer to automate the downloading of pages from the Ford owner's manual website. The goal is to download the content of each page, excluding unnecessary elements such as buttons and footers, and save them locally as PDF files.
 
+## OK, but why?
+The manufacturer forgot to include the owners manual for 2015/may and later B-max models in hungarian. The manual is only available on their website [here](https://www.fordservicecontent.com/Ford_Content/vdirsnet/OwnerManual/Home/Content?variantid=3548&languageCode=hu&countryCode=HUN&Uid=G1470770&ProcUid=G1467680&userMarket=HUN&div=f&vCode=WF0KXXERJKFM14824&vFilteringEnabled=False&buildtype=web)
+
 ## Installation
 
 Before running the program, ensure you have Node.js installed on your machine. You can install the required dependencies using the following command:
