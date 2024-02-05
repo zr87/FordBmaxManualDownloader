@@ -1,11 +1,29 @@
 {
   "name": "FordBmaxManualDownloader",
   "version": "1.0.0",
+  "description": "Node.js program to automate downloading pages from the Ford owner's manual website",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zr87/FordBmaxManualDownloader.git"
+  },
+  "keywords": ["Ford", "manual", "downloader", "Puppeteer", "Node.js", "scrape", "pdf"],
+  "author": "Zoltan Rakottyai",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "puppeteer": "^21.11.0"
-  }
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/zr87/FordBmaxManualDownloader.git/issues"
+  },
+  "homepage": "https://github.com/zr87/FordBmaxManualDownloader.git",
+  "peerDependencies": {}
 }
